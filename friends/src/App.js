@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 
-import LoginForm from './components/loginform';
+import LoginForm from './components/loginForm';
 
 function App() {
   return (
