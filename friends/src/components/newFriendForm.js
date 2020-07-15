@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { axiosWithAuth } from './axiosAuth';
+import {axiosWithAuth} from './axiosAuth';
 
 const NewFriendForm = (props) => {
 
     const [addnewFriend, setNewFriend] = useState({
+        
         name:'',
         age:null,
         email:''
@@ -11,9 +12,12 @@ const NewFriendForm = (props) => {
 
     const addFriend = e => {
         e.preventDefault();
-        axiosWithAuth().post('http://localhost:5000/api/friends', addnewFriend)
+        axiosWithAuth().post('http://localhost:5000/api/friends', addnewFriend, {headers: {
+            'Authorization': `token`
+        }})
         .then(res => {
-            console.log(res);
+            console.log(res.data)
+            setNewFriend(res.data);
         })
         .catch(err => console.log(err))
     }
@@ -24,14 +28,12 @@ const NewFriendForm = (props) => {
          });
      };
 
-    const onSubmit = e => {
-        e.preventDefault();
-    }
+    
     //console.log(props);
 
     return (
         <div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={addFriend}>
                 <input 
                 type='text'
                 name='name'
@@ -53,7 +55,7 @@ const NewFriendForm = (props) => {
                 value={props.state}
                 onChange={handleChanges}/>
 
-                <button onClick={handleChanges}>Add</button>
+                <button onClick={addFriend}>Add</button>
             </form>
         </div>
     )

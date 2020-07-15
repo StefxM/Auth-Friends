@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {axiosWithAuth} from '../components/axiosAuth';
+import {axiosWithAuth} from './axiosAuth';
 
 
 const LoginForm = (props) => {
@@ -9,9 +9,9 @@ const LoginForm = (props) => {
         e.preventDefault();
         axiosWithAuth().post("http://localhost:5000/api/login", credentials)
         .then(res => {
-            console.log(res);
-            localStorage.setItem('token', res.data.token);
-            this.props.history.push('/protected');
+            console.log(res.data);
+            localStorage.setItem('token', res.data.payload);
+            props.history.push('/protected');
         })
         .catch(err => console.log({err}))
     }
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
             value={credentials.password} 
             onChange={handleChange}/>
 
-            <button>Log in</button>
+            <button onClick={login}>Log in</button>
         </form>
         </div>
     )

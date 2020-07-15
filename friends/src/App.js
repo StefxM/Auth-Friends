@@ -8,9 +8,9 @@ import {
 import './App.css';
 import PrivateRoute from './components/PrivateRoute';
 
-import FriendsList from './components/friendsList';
+//import FriendsList from './components/friendsList';
 import LoginForm from './components/loginForm';
-
+import NewFriendForm from './components/newFriendForm';
 function App() {
   return (
     <Router>
@@ -20,7 +20,7 @@ function App() {
       <Link to="/protected">Protected Page</Link>
       </ul>
       <Switch>
-        <PrivateRoute exact path='/protected' component={FriendsList}/>
+        <PrivateRoute exact path='/protected' component={NewFriendForm}/>
         <Route path='/login' component={LoginForm}/>
         
       </Switch>

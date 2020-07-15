@@ -1,16 +1,22 @@
-import React from 'react';
+/*import React from 'react';
 
 import NewFriendForm from '../components/newFriendForm';
 
 
-const FriendsList = () => {
+const FriendsList = (props) => {
 
-
+    //console.log(props);
     return (
-        <div>
-            <NewFriendForm/>
+        <div >
+            <NewFriendForm props={props}/>
         </div>
     )
 }
 
 export default FriendsList;
+
+/*key={id}
+<NewFriendForm props={props}/>
+            <p>name:{name}</p>
+            <p>age:{age}</p>
+            <p>email:{email}</p>*/ 
