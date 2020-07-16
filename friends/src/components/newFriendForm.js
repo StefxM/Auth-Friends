@@ -12,9 +12,7 @@ const NewFriendForm = (props) => {
 
     const addFriend = e => {
         e.preventDefault();
-        axiosWithAuth().post('http://localhost:5000/api/friends', addnewFriend, {headers: {
-            'Authorization': `token`
-        }})
+        axiosWithAuth().post('http://localhost:5000/api/friends', addnewFriend)
         .then(res => {
             console.log(res.data)
             setNewFriend(res.data);

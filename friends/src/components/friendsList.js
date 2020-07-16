@@ -1,11 +1,12 @@
-/*import React from 'react';
+import React from 'react';
 
 import NewFriendForm from '../components/newFriendForm';
+import { axiosWithAuth } from './axiosAuth';
 
 
 const FriendsList = (props) => {
 
-    //console.log(props);
+    //axiosWithAuth().
     return (
         <div >
             <NewFriendForm props={props}/>
