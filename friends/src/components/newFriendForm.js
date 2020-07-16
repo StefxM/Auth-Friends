@@ -53,7 +53,7 @@ const NewFriendForm = (props) => {
                 value={props.state}
                 onChange={handleChanges}/>
 
-                <button onClick={addFriend}>Add</button>
+                <button>Add</button>
             </form>
         </div>
     )

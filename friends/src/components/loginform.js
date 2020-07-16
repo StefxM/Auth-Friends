@@ -42,7 +42,7 @@ const LoginForm = (props) => {
             value={credentials.password} 
             onChange={handleChange}/>
 
-            <button onClick={login}>Log in</button>
+            <button>Log in</button>
         </form>
         </div>
     )

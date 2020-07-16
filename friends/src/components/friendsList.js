@@ -5,8 +5,13 @@ import { axiosWithAuth } from './axiosAuth';
 
 
 const FriendsList = (props) => {
+    const list = () => {
+    axiosWithAuth().post('http://localhost:5000/api/friends')
+    .then(res => {console.log(res.data)})
+    .catch(err => console.log(err))
+    }
 
-    //axiosWithAuth().
+    console.log(list);
     return (
         <div >
             <NewFriendForm props={props}/>
