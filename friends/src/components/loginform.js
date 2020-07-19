@@ -1,24 +1,30 @@
 import React, {useState} from 'react';
-import {axiosWithAuth} from './axiosAuth';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 
-const LoginForm = (props) => {
-    const [credentials, setCredentials] = useState({});
+function LoginForm() {
+    const [login, setLogin] = useState({
+        username: '',
+        password: ''
+    });
 
-    const login = e => {
+    const history = useHistory();
+
+    const submit = e => {
         e.preventDefault();
-        axiosWithAuth().post("http://localhost:5000/api/login", credentials)
+        axios.post("http://localhost:5000/api/login", login)
         .then(res => {
             console.log(res.data);
             localStorage.setItem('token', res.data.payload);
-            props.history.push('/protected');
+            history.push('/friendslist');
         })
         .catch(err => console.log({err}))
     }
 
     const handleChange = (e) => {
-        setCredentials({
-            ...credentials, 
+        setLogin({
+            ...login, 
             [e.target.name]: e.target.value}
         )
     }
@@ -27,19 +33,19 @@ const LoginForm = (props) => {
 
     return (
         <div> 
-        <form onSubmit={login}>
+        <form onSubmit={submit}>
             <input 
             type="text" 
             name="username" 
             placeholder="Username" 
-            value={credentials.username} 
+            value={login.username} 
             onChange={handleChange}/>
 
             <input 
             type="password" 
             name="password" 
             placeholder="Password" 
-            value={credentials.password} 
+            value={login.password} 
             onChange={handleChange}/>
 
             <button>Log in</button>

@@ -1,27 +1,32 @@
 import React, {useState} from 'react';
-import {axiosWithAuth} from './axiosAuth';
+import { useHistory } from "react-router-dom";
+import axiosWithAuth from './AxiosWithAuth';
 
-const NewFriendForm = (props) => {
+const NewFriend = (props) => {
 
-    const [addnewFriend, setNewFriend] = useState({
+    const [state, setState] = useState({
         
         name:'',
-        age:null,
+        age:'',
         email:''
     });
+    const history = useHistory();
 
-    const addFriend = e => {
+    const submit = e => {
         e.preventDefault();
-        axiosWithAuth().post('http://localhost:5000/api/friends', addnewFriend)
+        setState({
+            ...state,
+            id:Date.now()
+        });
+        axiosWithAuth().post('/friends', state)
         .then(res => {
-            console.log(res.data)
-            setNewFriend(res.data);
+            history.push('/friends')
         })
         .catch(err => console.log(err))
     }
      const handleChanges = e => {
-         setNewFriend({
-             ...addnewFriend,
+         setState({
+             ...state,
              [e.target.name]: e.target.value
          });
      };
@@ -31,32 +36,32 @@ const NewFriendForm = (props) => {
 
     return (
         <div>
-            <form onSubmit={addFriend}>
+            <form onSubmit={submit}>
                 <input 
                 type='text'
                 name='name'
                 placeholder='Name'
-                value={props.state}
+                value={state.name}
                 onChange={handleChanges}/>
 
                 <input 
                 type='numbers'
                 name='age'
                 placeholder='Age'
-                value={props.state}
+                value={state.age}
                 onChange={handleChanges}/>
 
                 <input 
                 type='text'
                 name='email'
                 placeholder='Email'
-                value={props.state}
+                value={state.email}
                 onChange={handleChanges}/>
 
-                <button>Add</button>
+                <button>Add Friend</button>
             </form>
         </div>
-    )
+    );
 }
 
-export default NewFriendForm;
+export default NewFriend;

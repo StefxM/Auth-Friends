@@ -1,22 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import Friend from './Friend';
+import axiosWithAuth from './AxiosWithAuth';
 
-import NewFriendForm from '../components/newFriendForm';
-import { axiosWithAuth } from './axiosAuth';
 
+const FriendsList = () => {
+    const [friends,setFriends] = useState([])
+    const history = useHistory();
 
-const FriendsList = (props) => {
-    const list = () => {
-    axiosWithAuth().post('http://localhost:5000/api/friends')
-    .then(res => {console.log(res.data)})
+    useEffect(() => {
+    axiosWithAuth().get('/friends')
+    .then(res => {setFriends(res.data)})
     .catch(err => console.log(err))
-    }
+    }, [])
 
-    console.log(list);
+    //console.log(list);
     return (
         <div >
-            <NewFriendForm props={props}/>
+            <h1>Friends List</h1>
+            <button onClick={() => history.push('./addFriend')}>Add New Friend</button>
+            {friends.length > 0 ? <Friend friends={friends} setFriends={setFriends}/> : ''}
         </div>
-    )
+    );
 }
 
 export default FriendsList;
