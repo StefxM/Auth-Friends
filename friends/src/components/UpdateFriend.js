@@ -39,6 +39,7 @@ function UpdateFriend() {
         axiosWithAuth()
         .put(`/friends/${id}`, state)
         .then(res => {
+            setState(res.data)
             history.push('/friends');
         })
         .catch(err => console.log(err));

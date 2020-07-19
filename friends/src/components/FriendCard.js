@@ -4,10 +4,10 @@ import {useHistory} from 'react-router-dom';
 function FriendCard(props){
 
     const history = useHistory();
-
+    console.log(props);
     return(
         <div className='friend' 
-        onClick={() => history.push(`/updateMovie/${props.id}`)}>
+        onClick={() => history.push(`/updateFriend/${props.id}`)}>
         <h3>Name:{props.name}</h3>
         <p>Age:{props.age}</p>
         <p>Email:{props.email}</p>

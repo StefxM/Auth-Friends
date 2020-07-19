@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import axiosWithAuth from './AxiosWithAuth';
 
-const NewFriend = (props) => {
+function NewFriend() {
 
     const [state, setState] = useState({
         
